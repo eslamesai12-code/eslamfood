@@ -1,0 +1,219 @@
+{
+  "entities": {
+    "MenuItem": {
+      "title": "MenuItem",
+      "description": "An individual menu item within a restaurant",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "image": { "type": "string" },
+        "isAvailable": { "type": "boolean" }
+      },
+      "required": ["id", "category", "name", "price", "isAvailable"]
+    },
+    "Restaurant": {
+      "title": "Restaurant",
+      "description": "A restaurant store profile registered within the system",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "ownerEmail": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "image": { "type": "string" },
+        "lat": { "type": "number" },
+        "lng": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "trialEndsAt": { "type": "string" },
+        "status": { "type": "string", "enum": ["trial", "active", "expired", "pending_approval"] },
+        "paymentSenderNumber": { "type": "string" },
+        "paymentTransactionId": { "type": "string" },
+        "paymentSubmittedAt": { "type": "string" },
+        "subscriptionExpiresAt": { "type": "string" }
+      },
+      "required": ["id", "ownerId", "ownerEmail", "name", "phone", "address", "lat", "lng", "createdAt", "trialEndsAt", "status"]
+    },
+    "OrderItem": {
+      "title": "OrderItem",
+      "description": "An item inside a customer order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "quantity": { "type": "number" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "name", "price", "quantity"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A customer order placed for a restaurant",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "restaurantId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "customerAge": { "type": "integer" },
+        "customerGovernorate": { "type": "string" },
+        "customerStreet": { "type": "string" },
+        "orderType": { "type": "string", "enum": ["delivery", "dine_in", "pickup"] },
+        "tableNumber": { "type": "string" },
+        "deliveryAddress": { "type": "string" },
+        "pickupBranchId": { "type": "string" },
+        "pickupBranchName": { "type": "string" },
+        "paymentMethod": { "type": "string", "enum": ["visa", "cash", "instapay"] },
+        "items": { "type": "array" },
+        "totalPrice": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "preparing", "ready", "completed", "cancelled"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "restaurantId", "customerName", "customerPhone", "orderType", "items", "totalPrice", "status", "paymentMethod", "createdAt"]
+    },
+    "Branch": {
+      "title": "Branch",
+      "description": "A branch of the restaurant located in a specific Governorate",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "governorate": { "type": "string" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "disabledTabs": { "type": "array" }
+      },
+      "required": ["id", "name", "governorate", "address"]
+    },
+    "AdminSettings": {
+      "title": "AdminSettings",
+      "description": "Global administrator settings configuration",
+      "type": "object",
+      "properties": {
+        "vodafoneCashNumber": { "type": "string" },
+        "subscriptionFee": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["vodafoneCashNumber", "subscriptionFee", "updatedAt"]
+    },
+    "TestConnection": {
+      "title": "TestConnection",
+      "description": "A dummy structure used for testing firestore network connection on startup",
+      "type": "object",
+      "properties": {
+        "status": { "type": "string" }
+      }
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "description": "An action log recorded under a specific restaurant",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "userRole": { "type": "string" },
+        "description": { "type": "string" },
+        "orderId": { "type": "string" },
+        "userAgent": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["type", "userRole", "description", "timestamp"]
+    },
+    "OnlineClient": {
+      "title": "OnlineClient",
+      "description": "An active client session heartbeat to determine live users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string" },
+        "lastActive": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "role", "lastActive", "updatedAt"]
+    },
+    "AppReview": {
+      "title": "AppReview",
+      "description": "A system or restaurant evaluation review submitted by customers or owners",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "userName": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "restaurantId": { "type": "string" },
+        "restaurantName": { "type": "string" },
+        "type": { "type": "string", "enum": ["customer", "restaurant_owner"] },
+        "orderId": { "type": "string" }
+      },
+      "required": ["rating", "createdAt", "type"]
+    },
+    "MarketingAgent": {
+      "title": "MarketingAgent",
+      "description": "A marketing agent or representative registered under a specific restaurant to track performance and payouts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "restaurantId": { "type": "string" },
+        "name": { "type": "string" },
+        "age": { "type": "integer" },
+        "address": { "type": "string" },
+        "governorate": { "type": "string" },
+        "monthlySubscriptionsCount": { "type": "integer" },
+        "commissionPercentage": { "type": "number" },
+        "targetSubscriptions": { "type": "integer" },
+        "registeredAt": { "type": "string" }
+      },
+      "required": ["id", "restaurantId", "name", "age", "address", "governorate", "monthlySubscriptionsCount"]
+    }
+  },
+  "firestore": {
+    "/app_reviews/{reviewId}": {
+      "schema": "AppReview",
+      "description": "System or restaurant evaluations and feedback comments"
+    },
+    "/admin_settings/{settingsId}": {
+      "schema": "AdminSettings",
+      "description": "Global system parameters and settings"
+    },
+    "/restaurants/{restaurantId}": {
+      "schema": "Restaurant",
+      "description": "Registered restaurants in the platform"
+    },
+    "/restaurants/{restaurantId}/menu_items/{itemId}": {
+      "schema": "MenuItem",
+      "description": "The custom food and beverage offerings under a specific restaurant store"
+    },
+    "/restaurants/{restaurantId}/branches/{branchId}": {
+      "schema": "Branch",
+      "description": "Registered geographic branches for a restaurant"
+    },
+    "/restaurants/{restaurantId}/activity_logs/{logId}": {
+      "schema": "ActivityLog",
+      "description": "Action logs recorded for a restaurant/owner audit"
+    },
+    "/restaurants/{restaurantId}/online_clients/{clientId}": {
+      "schema": "OnlineClient",
+      "description": "Active web client session heartbeats"
+    },
+    "/restaurants/{restaurantId}/marketing_agents/{agentId}": {
+      "schema": "MarketingAgent",
+      "description": "Marketing agents hired to acquire subscriptions and customers under the restaurant brand"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Dine-in and Delivery customer orders"
+    },
+    "/test/{testId}": {
+      "schema": "TestConnection",
+      "description": "Dummy path checked dynamically at app boot time"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Islam Food",
+  "description": "An intelligent integrated platform for managing your restaurant, tracking live orders, calculating service/delivery fees, sales statistics, customer reviews, and AI-enabled order parsing from emails.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
