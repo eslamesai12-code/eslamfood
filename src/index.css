@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800;900&family=Readex+Pro:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Cairo", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  direction: rtl; /* Set default text direction to Arabic (RTL) */
+  background-color: #f8fafc;
+  -webkit-tap-highlight-color: transparent; /* Disable the tap visual flicker on Android/iOS links */
+  user-select: none; /* Keep buttons and tabs clean from accidental text-highlight selection */
+}
+
+/* Support selected-text copy for food items or addresses */
+.select-all {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+/* Native-like smooth inertia momentum scrolling on touch screen tablets and phones */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Slim scrollbars for premium mobile feel */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(234, 88, 12, 0.15);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(234, 88, 12, 0.35);
+}
+
+/* Smart bottom safe-area paddings matching modern Android devices */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Hide Google Translate top bar and elements to keep the interface premium and native */
+.skiptranslate, 
+.goog-te-banner-frame, 
+#goog-gt-tt, 
+.goog-te-balloon-frame,
+iframe.goog-te-menu-frame,
+.goog-te-menu-value {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+/* Fix direction when translate modifies html */
+html.translated-ltr {
+  direction: ltr !important;
+}
+html.translated-ltr body {
+  direction: ltr !important;
+}
+html.translated-rtl {
+  direction: rtl !important;
+}
+html.translated-rtl body {
+  direction: rtl !important;
+}
+

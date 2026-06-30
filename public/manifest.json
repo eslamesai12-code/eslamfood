@@ -1,0 +1,25 @@
+{
+  "name": "إسلام فود | منصة المطاعم الرقمية",
+  "short_name": "إسلام فود",
+  "description": "منصة مبتكرة لإدارة المطاعم وطلب الطعام بسرعة وذكاء في الغربية ومصر",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8fafc",
+  "theme_color": "#ea580c",
+  "categories": ["food", "business", "shopping"],
+  "icons": [
+    {
+      "src": "/app_logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/app_logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

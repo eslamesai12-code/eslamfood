@@ -3,20 +3,27 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
-export default defineConfig(() => {
-  return {
-    plugins: [react(), tailwindcss()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
+export default defineConfig({
+  // تحديد المسار الأساسي لضمان عمل الروابط بشكل صحيح على Vercel
+  base: '/',
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      // تعيين @ ليشير إلى مجلد src بشكل صحيح
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+  build: {
+    outDir: 'dist',
+    emptyOutDir: false, // لضمان عدم مسح ملفات السيرفر التي قد تُبنى بشكل متوازي
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
       },
     },
-    server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
-      hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
-    },
-  };
+  },
+  server: {
+    hmr: process.env.DISABLE_HMR !== 'true',
+    watch: process.env.DISABLE_HMR === 'true' ? null : {},
+  },
 });
